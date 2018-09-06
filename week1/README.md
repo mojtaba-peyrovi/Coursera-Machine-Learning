@@ -1,7 +1,7 @@
 # Coursera Course for Machine Learning:
 
 
-## Week 1:
+## Week 1: (Part 1)
 
 ### Welcome:
 some examples of machine learning:
@@ -69,3 +69,74 @@ Or in data-centers which of them can be categorized together in order to have be
 #### Octave environment: 
 
 Its a very powerful feature of Matlab that normally companies use to prototype a machine learning situation and get it work properly then they will write it in Java, C, Python, etc. Its so much faster than writing it in a programming language.
+
+
+## Week 1: (Part 2)
+
+### Model Representation
+---
+In this course they call continuous data, 'real-valued' data.
+in Regression we tend to predict real-valued data, while in Classification algorithm, we tend to predict discrete-valued data.
+
+__some notations:__
+
+m: number of training examples.
+
+x: features
+
+y: output, target, class, or label.
+
+(x,y): A single training example. a pair of feature(s) and output.
+
+(xi,yi) as i-th training example.
+
+
+* when we have the training set, we use learning algorithm and the result of the algorithm will be 'h' referring to **__Hypothesis__**.
+* this h function will take the size of a new house and predicts the price of it.
+* __h__: is a function that maps x's to y's.
+
+(Check photo saved in the folder called linear-regression-scheme.png)
+
+linear regression function: h(x)= ax + b 
+
+The name of this model is: __Linear Regressioin with one variable__. or __Univariate Linear Regression__.
+
+### cost function
+---
+in hypothesis model h(X) = ax + b  we call a and b __parameters__ of the model.
+
+* the idea of linear regession is to find the values of a,b to make our h(x) as close as possible to y which is the right answer.
+
+we need to minimize (h(x)-y)^2  and we need to sum up all of these values for each training record. and then the average of it has to be minimized.
+
+(check the photo in the folder called linear-regression-cost-function.png)
+
+* the cost function is sometimes called __Squared Error Function__.
+
+### Gradient Descent
+---
+	
+   it is an algorithm that finds the best values for parameters in order to minimize the cost function J. 
+   
+   This algorithm is not only used in linear regression. It's used in so many other algorithms of machine learning.
+   
+   How gradient descent works?
+  
+  1- it picks random initial values for all parameters. for example if we have 2 parameters a,b it may say: a=0, b=0
+  2- then it keeps changing a,b to minimize J. it starts to look 360 degree around and finds the best direction for the next step in order to make the height of the point (cost value) lowest in fastest time.
+  
+ 
+* some notations of the gradient descent function:
+
+:=    Assignment operator, for example: a:=b means take the value of b and assign it to a.
+
+Alpha: learning rate which tells how big the steps must be.
+
+Derivative term: will learn later.
+
+__important__: in gradient descent the left hand value is calculated and simultaneously teta0 and teta1 will be updated. Not updating after the value calculation;
+
+(check the photo in the folder called gradient-descent.jpg)
+
+### Gradient Descent Intuition
+---

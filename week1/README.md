@@ -135,8 +135,114 @@ Alpha: learning rate which tells how big the steps must be.
 Derivative term: will learn later.
 
 __important__: in gradient descent the left hand value is calculated and simultaneously teta0 and teta1 will be updated. Not updating after the value calculation;
+It means that first calculate the gradient descent for both teta0, teta1, then update both of them, not calculating teta1 and update it then calculate teta2 and update it.
 
 (check the photo in the folder called gradient-descent.jpg)
 
 ### Gradient Descent Intuition
 ---
+
+__Explanation__: the derivative term that we have in gradient descent formula is partial derivative. it means if we have more than one variable we treat the others as constants and take the derivate of the function based on only one variable. in case of having only one variable, derivative and partial derivative are the same.
+
+
+Simply when the derivate is negative, the value of cost function will increase and when the derivative is positive, the cost function will decrease.
+
+* When Alpha or learning rate is too small the gradient descent will be so slow.
+* When Alpha is too big, gradient descent will overshoot the minimum and may fail to find the right minimum.
+* As we approach the local minimum, the gradient descent will automatically take smaller steps so, no need to change learning rate (Alpha) over time. 
+
+(In order to understand it better look at 3 photos called gradient-descent-math-1,2,3.jpg)
+
+### Gradient Descent for Linear Regression
+---
+__Convex Function__: means a bowl shaped function. 
+
+Gradeient decent function is always a convex function so we won't worry for having more than one local minimum. It means local and global minimums are always identical.
+
+
+__Batch Gradient Descent__: it refers to the fact that in each step of gradient descent we calculate the partial derivatives for the whole batch of training examples.
+
+
+* there are some other versions of gradient descent that don't calculate the whole batch and just examine a fraction of the whole training data.
+
+## Week 1: (Part 3)
+
+### Matrices and vectors
+---
+
+__Matrix Dimension__: the number of rows times the number of columns. e.g. 4x2  four by two.
+
+__addressing a value in the matrix__: Aij means the ith row and jth column of matrix A.
+
+__vector__: vector is a subset of matrix or a type of matrix that has only one column. so its dimension is always nx1.
+
+
+* sometimes when we have a vector with n values and one row we can call it __**n dimensional vector**__.
+
+* also another notation for matrices is R3x4 it means a 3x4 dimensional matrix and R4 means a 4 dimensional vector.
+* in vectors we say Y2 means second element of vector Y.
+
+__1 indexed vector__ is a vector that its index numbers start with 1. 
+__0 indexed vector__ is a vector that its index numners start with 0.
+
+1 indexed vectors are more common and we assume by default that vectors are 1 indexed.
+* we use uppercase letters to refer to matrices.
+
+* we use lowercase for single numbers or variables or __vectors__.
+
+### Addition and Scalar Multiplication
+---
+
+__Addition__: Matrices must be in the same dimension and each counterpart pairs would sum up and the result would be written in the result matrix at the same location.
+
+__Multiplying matrices by the scaler number__: it's gonna be a number that multiplying it to the matrix will cause each element to be multiplied to the same number. dividing the matrix is the same as multiplying.
+
+### Matrix Vector Multiplication
+---
+the rule is the number of columns of the matrix must be equal to the vector rows.
+
+We can use this to predict the hypothesis function for example for linear regression:
+h(x) = -40 + 0.25x ==> we can define a martix of all training data and time it to another matrix of all parameters and will end up having all predictions:
+
+```
+Predictions_vector = data_matrix * parameters_vector
+```
+
+### Matrix Matrix Multiplication
+---
+Again the rule is the columns of the first matrix must be equal to the rows of the second matrix. and the outcome would be in the dimension of rows from the first matrix and columns of the second matrix.
+
+* An easy trick to do this is to start picking up the columns of the second matrix and multiply them to the first matrix as a simple matrix-vector multiplication and then do it with all columns of the second matrix. then we put all the results in a new matrix and it would be the result.
+
+We can use this method to programmatically compare several hypothesis formulas at the same time. 
+(Check a picture called matrix-matrix-hypothesis-example.jpg)
+
+### Matrix Multiplication Properties
+---
+
+__Commutative__: قابل جابجایی
+
+
+Matrix multiplication is __NOT__ commutative.
+
+__Associative__: when we have 3 numbers multiplied we are free to do any of the operations first. this is called be associative.
+
+Matrix multiplication __IS__ associative.
+
+__Identity Matrix__: the type of matrix that has all zero values except diagonal values which are all 1. we show it like: I(nXn)
+
+
+* Matrix multiplication is commutable when one of the matrices is an identity matrix.
+
+### Matrix Inverse and Matrix Transpose
+---
+
+__Inverse Matrix__: If A is a mxm matrix (Square matrix), A^-1 is a matrix that when we multiply it to A it gives us the Identity matrix of I.
+
+
+**__Only square matrices have inverse matrices.__**
+
+__Transpose Matrix__: it is simply made by switching between rows and columns of the matrix. it means we make the first row of matrix A and make it the first column of AT matrix.and second row for second column.
+
+
+

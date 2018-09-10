@@ -89,17 +89,49 @@ __Debugging__: The rule is that J or the cost function has to reduce after __EVE
 
  *  If the plot shows that the j is increasing as we iterate more it means that the gradient descent is  not working. and usually means that we need to pick a smaller alpha.
 
-* Also simetimes we have J plot keeps going up and down several times, it's also a sign that Alpha has to be a smaller amount.
-*  If Alpha is so small it makes the conversion so slow.
-
-* A good approach is to keep changing alphas to the scale of ten. for example we can start with 0.0001, then 0.001, then 0.01, then 0.1 and 1.
-
-__(check a photo called gradient-descent-j-per-iteration.jpg)__
-
-### Features and Polynomial
+### Normal Equation
 ---
+__Normal Equation__: sometimes instead of iterating gradient descent algorithm, we can find teta(parameters) analytically in one step.
 
-* Sometimes we should come up with new features that are more likely to predict the label. for example instead of using the width and depth of a house we can make a new feature and call it the area by multiplying the depth into the width.
+* How we do it? well, in mathematics in order to find minimum of a function we just calculate the derivative and set it to zero and calculate the variable.
 
+* But in case of machine learning and linear regression the parameter or teta is not a single number, it is a vector of n+1 features.
+* One way to deal with the vector of features we can take partial derivate of j function based on each feature and one by one set them to zero and calculate tetas or parameters.
 
-* Some times we may have to fit a non-linear regression line and in order to it maybe we need to have X^2 or x^3 features. When we have this situation we can define x^2 as a new feature and x^3 as a new feature and again keep doing the gradient descent but we need to be careful about the feature scaling because the results of features to the power of 2 and 3 would be so much bigger than x itself.
+* another way is making a matrix of all features and their values in all examples and we add a column of ONEs for x0 values. we call this matrix X. Then we make a vector of all lable values and we call it y. this way here is the value of teta to minimize z function:
+```
+teta =(XT * 8X)^-1XT*y       (XT:Transposed matrix of X)
+
+for calculating it in Octave: pinv(X'*X)*X'*y
+
+in octave:   
+-X' means X  transposed
+-pinv() function calculates the inverse.
+```
+
+When we use normal equation instead of gradient descent we don't need to do __feature scaling__. so features can be in any scale.
+
+__Gradiant Descent vs Normal Equations (Only for linear regression):__
+
+- in GD we need to chose learning rate alpha while in NE we don't.
+
+- in GD we need to have many iterations while in NE we don't need any iteration.
+
+- when we have too many features (large n), GD works so well while NE is so slow and costly.
+- (__the idea about too many features__:  when we have features more than 10,000 we can start using GD, otherwise for the features less than that, NE works well)
+
+**_normal equation doesn't work for classification and some other algorithms. for those algorithms we need to used gradient descent._**
+
+(Check a photo called normal-equation.jpg)
+
+### Normal Equation Noninvertibility (Optional)
+---
+Sometimes the XT*X is non-invertible and cant be inverted (it's called _singular_ or _degenerate_). in 2 cases it is possible to happen:
+
+1- redundant features: when one feature is a linear function of the other feature for each if a feature is square meter and the other is square feet, their relationship would be always: X1 = (3.28)^X2
+
+**_the solution is to see if there is any redundancy in data and try to resolve it by deleting one of the features._**
+
+2- when m<=n  when we have 10 samples and 100 features.
+
+**_in this case we can delete some features or use a technique called  Regulization._**

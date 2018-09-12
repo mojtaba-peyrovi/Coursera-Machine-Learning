@@ -493,3 +493,146 @@ flipud(A)
 ```
 pinv(A)
 ```
+
+### Plotting Data
+---
+* first example:
+	t = [0:0.01:0.98]
+    y1 = sin(2 * pi * 4 * t)
+
+    We can simply plot it like this:
+    ```
+    plot(t,y1)
+    ```
+    If we say y2 = cos(2 * pi * 4 * t) and then plot it like: plot(t,y2) the new 		plot will overwrite the first plot.
+* if we want to keep the first plot and draw a new plot on the top of it, we need to have this object after the first plot to keep it:
+
+```
+hold on;
+```
+Now we can plot the second chart and we can pass 'r' as another parameter to say it should be in red.
+```
+plot(t,y2,'r');
+```
+* In order to write captions for y and x axis, and legend we simply say:
+```
+   xlabel('time')    and ylabel('value')     legend('sin','cos')
+```
+* in order to save the plot as a png file:
+```
+print -dpng 'myPlot.png'
+```
+* In order to close a plot we simply say:
+```
+close
+```
+*  __A very useful command:__ When we want to put a grid on the plot and access the first element we say:
+```
+subplot(1,2,1);   % Divides plot to a 1x2 grid, access the first element.
+```
+and now we can plot anything inside the first element. Similarly we can access the second element and plot another chart.
+
+* We can also change the range of axis like this:
+```
+axis([0.5 1 -1 1])   ==> 0.5 1 is the x range and -1 1 is y range.
+```
+* for clearing a figure:
+
+```
+clf;
+```
+* we can visualize a matrix and it shows a heatmap of the values.
+```
+A = magic(5);   imagesc(A)
+```
+We can change the scale to grayscaled and show the color bar like this:
+```
+imagesc(A), colorbar, colormap gray;
+```
+* Comma chaining of command versus selicolon chaining:
+we can run more than one command at the same time by separating them by either commas or semicolons, the difference is with semicolon it doesn't show the results but with commas we can see the results immediately after initializing variables.
+
+### For, While, if, functions
+---
+* For:
+ if we have a 10x1 matrix of zeros:    v = zeros(10,1), we can make for statement like this:
+ ```
+ for i=1:10,
+   v(i) = 2^i;
+ end;
+ ```
+ * While: again using v which is having 11 values each one is 2 to the power of its index number:
+ ```
+ i=1;
+ while i <= 5,
+   v(i) = 100;
+ i = i+1;
+ end;
+ ```
+ This replaces the first 4 values of v with 100.
+ * how to use break?
+ ```
+ i = 1
+ whilte true,
+    v(i) = 999;
+    i = i + 1;
+    if i == 6,
+        break;
+    end;
+ end;   
+ ```
+ this code keeps changing the values of items in v to 999 from the first one but when it gets to the 6th index it stops the process.
+* If Else:
+```
+v(1) = 2
+if v(1) == 1,
+   disp('The value is one');
+elseif v(1) == 2,
+   disp('The value is two');
+else
+   disp('The value is not one or two');
+end;
+```
+* How to exit octave command prompt?
+```
+exit   or  quit
+```
+* In order to write functions in octave we need to define functions in different files with .m extension and address them in our command line. we define functions like this:
+```
+function y=squareThisNumber(x)
+  y = x ^ 2;
+ ```
+because we should always navigate into the function files folder and its a hassle, we can add a specific folder for functions to the path of octave to make functions work globally. like this:
+```
+addpath('c:\Users\mojiway\desktop')
+```
+and this way the functions saved on desktop will work globally;
+
+* We can return more than one value in octave like this:
+```
+function [y1, y2] = squareAndCubeThisNumber(x)
+  y1 = x^2;
+  y2 = x^3;
+  ```
+ In command line we need to say:
+ ```
+ [a, b] = squareAndCubeThisNumber(5)
+ ````
+ * example of calculating the cost function J based on some (x,y) values:
+
+ 	* first we define x matrix and y vector :
+ 	```
+    	X = [1 1;1 2;1 3] ==> we added all ones at the first column
+        because of x0=1 always.
+        y = [1; 2; 3;]
+   ```
+   Theta:
+   ```
+   theta = [0;1]
+   ```
+   (check this photo: cost-fuction-octave-example.jpg)
+
+
+### Vectorization
+---
+(check a photo called vectoriation.jpg)

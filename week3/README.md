@@ -69,3 +69,89 @@ by giving thetas the values of  -1, 0, 0, 1, 1 we can see that the decision boun
                  x1^2 + x^2 = 1  ==> a circle around (0,0) of radius 1
 
 (Check the photo called non-linear-decision-boundary.jpg)
+
+## Week 3: (Part 2)
+### Cost Function
+---
+The cost function can be derived from linear regression. we can write it this way:
+```
+cost(h(x),y) = 1/2(h(x)-y)^2
+```
+we need to minimize this function but we remember that h(x) is equal to 1/2(1+exp(-theta(T)*x)
+
+When we plot the cost function using the logistic regression definition, we end up having a __Non-Convex__ plot, which means it has so many local minimums and there is no guaranty that gradient descent would find the global minimum.
+
+What we need is to find a __Convex__ function that looks like a bowl with only one minimum.
+
+(check a photo called cost-function-non-convex.jpg)
+
+What we can conclude is, the squared cost function is not a good choice for cost function and we need to come up with something else.
+
+Here is the new cost function:
+
+```
+1- Cost(h(x),y) = -log(h(x))  if   y=1
+
+2- Cost(h(x),y) = -log(1-h(x))   if  y=0
+```
+(for first situation check a photo called new-cost-function-y-one.jpg)
+(for second situation check a photo called new-cost-function-y-zero.JPG)
+
+### Simplified Cost Function and Gradient Descent
+---
+We can write the two lines of cost function in one line like this:
+```
+cost(h(x),y) = -ylog((h(x))-(1-y)log(i-h(x))
+```
+And we can put this in J as cost function and then use gradient descent to minimize it.
+(Check a photo called gradient-descent.jpg)
+
+We now conclude that the cost function and gradient descent algorithm are all the same for linear regression and logistic regression, the only thing changed is the defintion of h(x).
+
+* Again for this algorithm we can vectorize the calculation instead of using for loops.
+
+* Feature scaling is something we can use to make gradient descent converge faster, just like linear regression.
+
+### Advanced Optimization
+---
+There are other ways and sometimes more sophisticated but effective compared to gradient descent, such as :
+```
+- Conjugate gradient
+- BFGS
+- L-BFGS
+```
+* Advantages of these algorithms:
+
+1- no need to manually pick learning rate alpha.
+
+2- often faster than gradient descent
+
+* Disadvantages:
+- They are more complex
+
+In Octave there is a function called fminunc() that can use these algorithms and automatically minimize the cost function. This function doesn't work if the parameter is only one number, it has to be at least a 2x1 vector.
+
+(Check a photo called octave-implementation-other-ways.jpg)
+
+
+## Week 3: (Part 3)
+### Multiclass Classification One-vs-all
+---
+Some examples of multiclass classification:
+* Email foldering/tagging: Work, Friends, Family, Hobby.
+* In medical exams: Not ill, Cold, Flu.
+* Weather forecast: Sunny, Cloudy, Rain, Snow.
+
+The algorithm we use is called
+__One-vs- all__ or __one-vs-rest__.
+
+This is how it works:
+
+```
+We convert the dataset to multiple biinary classification cases where
+each time we make one of the classes 1 and the rest of the dataset 0.
+And we keep doing it for each class.
+```
+(Check a photo called multiple-classifiers.jpg)
+
+At the end we need to pick a classifier that maximizes the value of h(x).

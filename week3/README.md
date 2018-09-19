@@ -1,4 +1,4 @@
-# Coursera Course for Machine Learning:
+## Coursera Course for Machine Learning:
 
 
 ## Week 3: (Part 1)
@@ -155,3 +155,47 @@ And we keep doing it for each class.
 (Check a photo called multiple-classifiers.jpg)
 
 At the end we need to pick a classifier that maximizes the value of h(x).
+
+## Week 3: (Part 4)
+
+### The Problem of Overfitting
+---
+Overfitting is a common problem happening while applying machine learning algorithms and there is a technique called __Regularization__ that can minimize this effect.
+
+__Underfitting or High Bias__: when the prediction doesn't fit correctly and precisely to the real values.
+(A photo called over-fitting-scheme-linear-regression.jpg shows what is overfitting in linear regression and another photo called over-fitting-scheme-logistic-regression.JPG that shows overfitting in logistic regression.)
+
+When overfitting happens we can do two things:
+
+1) Reduce number of features:
+	* Manually select which features to keep
+	* Model selection algorithm.
+
+Disadvantage of this method is we have to get rid of some information.
+2) Regularization:
+	* we keep all features but reduce the magnitude or value of parameters.
+	* It works well when we have a lot of features, each of which contributes a bit to predicting y.
+
+### Cost Function
+---
+We need to add __Regularization Parameter__ to the end of the cost function.
+(Check a photo called regularization-parameter.jpg)
+
+When Landa is so big, it means we have all parameters close to zero and it means that the hypothesis will be h(x) = theta(0) and it will be a straight line and we can say it has _underfitting_.
+
+### Regularization Linear Regression
+---
+Now we can see how the regularization works with gradient descent:
+
+After doing some calculus, we can see the gradient descent will look like a photo called regularization-gradient-descent-linear-reg.jpg)
+the term:
+```
+1- (alpha) * (landa)/m
+```
+is less than 1 because m is usually a big number and alpha is smaller than 1.
+
+For __Normal Equation__: check the photo called "regularization-normal-equation-linear-reg.JPG"
+
+### Regularization Logistic Regression
+---
+Check a photo called regularization-gradient-descent-logistic-reg.JPG.

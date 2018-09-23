@@ -9,16 +9,16 @@ Although linear regression and logistic regression are great algorithms but they
 
 ## Week 4: (Part 2)
 
-Artificial Neural networks simulate neurons in human brain.
+Artificial Neural networks simulate neurons in human brain. 
 
 __Neuron:__ Neuron is a computational unit that takes inputs, does some process or computation on data and releases an output.
 (Photo: neuron-in-the-brain.jpg)
 
-Similar to human neurons we can draw ANN units that takes the input of x(i) and doest the computation (for example calculating the logistic hypothesis and returns h(x) as the neuron output.
+Similar to human neurons we can draw ANN units that takes the input of x(i) and doest the computation (for example calculating the logistic hypothesis and returns h(x) as the neuron output. 
 
 sometimes we add x(0) also as an input which is called __Bias Unit__ which always outputs the value __one__.
 
-When the neuron uses sigmoid function to calculate h(x) we sometimes call this function __Sigmoid Activation Function__.
+When the neuron uses sigmoid function to calculate h(x) we sometimes call this function __Sigmoid Activation Function__. 
 
 Sometimes in ANN science people use the term __Weights__ instead of __parameters__ which are representing __Thetas__.
 (photo: ANN-Model.jpg)
@@ -32,3 +32,27 @@ The final layer is called __Output Layer__.
 Any layer in the middle is called __Hiden Layer__ and any of the neurons in the layer are called __Hidden Units__.
 
 Photo: model-representation-1.jpg
+
+__Important Photo:__ forward-propagation-vectorized-implementation.jpg
+
+## Week 4: (Part 3)
+
+Now we can take a look at some examples on how to compute the hypothesis. 
+
+__Notation__: sometimes we use this:  y = x1 XOR x2  which means y can be x1 or x2.
+
+Sometimes we use y = x1 XNOR x2 which means NOT(x1 XOR x2)
+
+photo: XOR-XNOR.jpg
+
+__sample1__: photo:  and-function.jpg
+
+__sample2__: photo: or-function.jpg
+
+making and example of a network with one layer of hidden nodes: calculating XNOR function, check this photo: XNOR-network.jpg
+
+
+
+
+
+

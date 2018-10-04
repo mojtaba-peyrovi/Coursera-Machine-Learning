@@ -72,3 +72,98 @@ we should use cross-validation set and pick a model based on that.
 ```
 
 Doing this helps us to preserve test dataset for later when we want to test the model and don't reuse them so, this way our judgment would be more fair and close to reality.
+
+## Week 6: (part 2)
+
+If we run an algorithm and it doesn't work as expected its most of the time the case that we have high bias or high variance. (Underfitting or overfitting)
+
+(Photo: bias-vs-variance.jpg) and (bias-vs-variance-graph.jpg)
+
+* As we can see in the chart for bias and variance, if we have high bias, which is corresponding to the left side of the chart, we will have both train and cross-validation errors (J) high and actually these two error values are close.
+If we have this case then we can conclude that the learning algorithm is suffering from __high bias or underfitting__.
+* On the contrary, when we have J(train) very low and J(cv) much higher than J(train), it means that our learning algorithm is suffering from __high variance or overfitting__.
+
+(photo: optimal-value-for-bias-variance.jpg)
+
+__Remind:__ Regularization helps overfitting.
+
+Now let's see how can we analyze bias/variance with regularization.
+
+check photo: linear-regression-regularization.jpg
+
+As we can see, if we have a big lambda, we will have all thetas heavily penalized and they will get almost zero compared to the big regularization term.
+
+Then we will have h(x) = Theta(0) because its not included in regularization term.
+and since the chart for h(x)=Theta(0) is a straight horizontal line, then we will have __underfitting__ problem. (High bias)
+
+On the other side if we have lambda=0 then we won't have any effect by regularization and the model would be overfitted or __High variance__.
+
+It seems like if we pick the lambda between those two values then we may have a good regularization. But how to pick a good lambda?
+
+We can pick a set of values starting from 0 and then 0.01 and try to multiply by 2 and try the next one until we get a value like 10. like the photo:
+(photo: choose-lambda.jpg)
+
+Now we can use these lambdas and minimize the cost function for each of them and find the thetas that minimize the J.
+
+Then we find J(cv) for each case using the calculated thetas.
+
+And finally we pick the lambda that returns the lowest J(vc).
+
+The last thing is to use the picked Theta and calculated J(test) to see how it can generalize with the test data.
+
+to generalize this:
+
+* when we have big lambda we have high bias problem. (underfit) So, J(train) and J(cv) will increase when lambdas increases.
+* On J(cv) when we have small lambda it means the regularization wouldn't make a big difference and we will have the risk of overfitting.
+
+(photo: J-train-cv-per-lambda-graph.jpg)
+
+As we can see in the photo we need to find a lambda that minimizes the values J(cv).
+
+__Learning Curve__: A very useful technique to see if the model is suffering from high bias or high variance or both.
+
+This curve is based on error J(train) and J(cv) versus the samples size(m). But m is constant. We should artificially use less samples for example 10 out of 100 and then plot.
+(photo: learning-curve.jpg)
+
+* As we can see in the photo, for small values of m its easy for the learning model to  find a good fit to the data but as we get m bigger and bigger it would be harder to find a curve that passes through all points and the cost will get higher.
+* On the other hand when we have larger data size the cross validation data will do better and get lower error.
+
+Let's see what happens to the learning curve if we have high bias.
+
+If we want to for a linear model to some data that won't be able to fit in a line, then the J(cv) would get flat so easily in leaning curve because there won't be much room for improvement. and training cost J(train) also would increase based on "m" but again flats easily as it will be doing similar to cv data. So we end up having the similar values for J(cv) and J(train).
+
+(Photo: high-bias-learning-curve.jpg)
+
+What the photo also shows is important:
+```
+If the learning algorithm is already suffering from high bias,
+adding more data wouldn't improve the performance.
+```
+
+If we have high variance, the more data we have the harder it will be to fit the data but still the cost of training would be fairly small.
+
+Also J(cv) will decrease a bit but still too high as the model can't predict well. The key to be able to guess there is a high variance is the __big gap between J(cv) and J(train)__ as we can see in the photo:  high-variance-learning-curve.jpg
+
+### Debugging the Learning Algorithm:
+
+Here is all the original solutions we learned in the beginning of this week. Let's see which one helps in which situation:
+
+* Getting more training examples: would help fixing _high variance_.
+* Trying smaller set of features: Again would help fixing _high variance_.
+* Trying to get additional features in most of cases will help fixing _high bias_ because high bias shows that the model is too simple.
+* Adding polynomial features: also another way to help _high bias_ problem.
+*  Decreasing lambda: will help fixing _high bias_.
+*  And Increasing lambsa fixed _high variance_.
+
+#### Neural Network and Overfitting:
+
+If we have few hidden nodes and hidden layers, it normally gets into __underfitting__, but it would be computationally cheaper.
+
+On the other hand if we have a lot of hidden layers or hidden nodes, the chance of having the model __overfitting__ and its also computationally more expensive.
+
+In the case of overfitting we can use regularization to improve it.
+```
+In most cases, having the larger neural network with regularization,
+works better than having a small neural network.
+```
+Sometimes we don't know how many hidden layers we need, again we can try the model with 1,2,3,4 etc. layers and compare the cost of J(Theta) and pick the minimum value.

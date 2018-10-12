@@ -167,3 +167,57 @@ In most cases, having the larger neural network with regularization,
 works better than having a small neural network.
 ```
 Sometimes we don't know how many hidden layers we need, again we can try the model with 1,2,3,4 etc. layers and compare the cost of J(Theta) and pick the minimum value.
+
+
+## Week 6: (part 3)
+
+__Spam Classification__:
+
+- Spam emails sometimes misspell words. like: w4tchs, med1cine
+
+The first question is how to represent x which is the features of the email?
+
+We can choose 100 words that are so popular in spam/non-spam emails. such as deal, buy, money, Moji, etc. (Moji means someone who knows my name has sent this email and its less likely to be a spam.) Then our X would be a vector of size 100, with 0 values for finding the value in the list of words and 1 for finding the value in the email.
+
+We don't need to pick the 100 words manually, normally there are some sample datasets of most common span words we can find online (betweeon 10,000 and 50,000).
+(photo: spam-classifier.jpg)
+
+__Interesting__:
+
+There are some websites like ["honeypot"](https://www.projecthoneypot.org)
+
+That end fake emails and make them accessible for spammers and get their emails and collect a lot of spam emails datasets.
+
+There are other ways of finding spam, for example developing sophisticated features based on email routing information(from email header: spammers use distorted email addresses) instead of the body of the email.
+
+Also we can develop some algorithms to detect misspellings because spam emails misspell a lot.
+In general there are 4 ways to increase the accuracy of the model, we can see them in this photo: building-spam-classifier.jpg
+
+There is no specific way to know which of the 4 ways would perform better.
+
+__Error Analysis__:
+
+Here is his recommendation on deciding which approach can lead us to better results in any machine learning project.
+(photo: ml-recommended-approach.jpg)
+
+__Fishing Emails__: Emails that persuade visitor to give them their password.
+
+__Stemming software (E.g. "[Porter stemmer](https://tartarus.org/martin/PorterStemmer)"__: software that can treat similar words based on their beginning letters in the same way.
+
+## Week 6: (part 4)
+
+__Skewed Classes__: answer in slides.
+
+__Precision/Recall__: answer in slides.
+
+When we have a case that we want to predict someone has cancer we can't tell the patients they have cancer easily unless we are so sure and confident about it.
+
+One way to be more confident is to change the classification prediction threshold from 0.5 to 0.7 so that if we predict this way we can make more certainty.
+
+_This way we have higher precision and lower recall_.
+
+And in other ways when we want to avoid false negatives we will have higher recall, and lower precision.
+
+## Week 6: (part 5)
+
+watch slides.

@@ -55,7 +55,8 @@ fprintf('\nLoading Saved Neural Network Parameters ...\n')
 load('ex4weights.mat');
 
 % Unroll parameters 
-nn_params = [Theta1(:) ; Theta2(:)];
+
+
 
 %% ================ Part 3: Compute Cost (Feedforward) ================
 %  To the neural network, you should first start by implementing the

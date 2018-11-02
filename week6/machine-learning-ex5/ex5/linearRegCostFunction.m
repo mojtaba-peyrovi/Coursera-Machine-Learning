@@ -25,9 +25,7 @@ grad = zeros(size(theta));
   J = (1/(2*m))*sum((h-y).^2) + (lambda/(2*m))*sum(theta_no_zero_index.^2);
 
   
-  grad_zero = (1/m)*sum(X'(1,:)*(h-y));  
-  %grad_rest = (1/m)*sum(X'(2,:)*(h-y)) + (lambda/m)*theta(2,:);
- 
+  grad_zero = (1/m)*sum(X'(1,:)*(h-y));   
 
  grad_rest = (1/m)*(X_prime_no_zero_index*(h-y)) + (lambda/m)*(theta_no_zero_index);
  grad = [grad_zero; grad_rest];

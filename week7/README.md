@@ -114,3 +114,29 @@ small C corresponds to higher bias and lower variance. because it means big lamb
 ```
 In order to see how to pick other parameter (Sigma^2) check this photo:
 (SVM-parameters.jpg)
+
+
+## Week 7: (Part 3)
+
+For SVM we dont normally write the whole software, instead we use packages like 'Liblinear' or 'Libsvm' , etc.
+
+__Important__: sometimes we dont use any kernel, and we call it "__Linear Kernel__".
+
+```
+when we have large n (features) and small m (samples) we can use linear kernel
+```
+
+But if we want to use kernels one of the functions would be Gaussian kernel:
+
+```
+When n is small and m is large Gaussian may work well
+```
+
+#### IMPORTANT: Before using Guassian Kernel sometimes we need to do feature scaling, when we have features with big differences in numbers.
+
+__Mercer's Theorem__:
+similarity functions we use have to satisfy a technical condition called Mercer's theorem to make sure SVM packages optimization run correctly and do not diverge.
+
+__other kernels__: check photo: other-kernels.jpg
+
+__Logistic regression vs SVM:__ check photo: logistic-regression-vs-svm.jpg.

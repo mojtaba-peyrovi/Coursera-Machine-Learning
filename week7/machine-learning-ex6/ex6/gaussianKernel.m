@@ -15,8 +15,9 @@ sim = 0;
 %               sigma
 %
 %
+euc = sum((x1-x2).^2);
 
-
+sim = exp(-euc/(2*sigma^2));
 
 
 

@@ -60,99 +60,20 @@ the cost function is sometimes called DISTORTION.
 
 __WRT: means with respect to__
 
+How to randomly initialize the centroids?
 
-## Week 8: (Part 2)
+first we have to make sure k < m. number of centroids have to be less than the number of samples.
 
-Second algorithm for unsupervised learning is called "Dimensionality reduction".
-
-__One of the most important reasons we need to have this alogorithm:__
-It helps for data compression and having data take up less space, also it can help the other learning algorithms run faster.
-
-In other words, say we have two features that measure the same length in cm and inches, we have to dismiss one of them. or when we have a project that 3 different teams are working on and we get data from different sources, we might have to find redundancies and eliminate them.
-(for more info check the slides.)
-
-## Week 8: (Part 3)
-
-__Principle component analysis(PCA):__
-It's goal is to lower the dimension again just like the previous algorithm. we want to formulate how PCA works.
-
-When we have a 2d dataset and want to do PCA on it, we have to have a line similar to linear regression that passes the closest to the points. and then we project all the points on the line.
-
-The distance between each point and the line is called __Projection Error__.
-
-We want to minimize projection errors.
-
-__Important__: before applying PCA we should use normalization and feature scaling to make sure two features x1,x2 have mean of zero and comparable values.
-
-(photo: PCA-line.jpg) and pca-problem-formulation.jpg
-
--  The difference between linear regression and PCA is that in LR we want to minimize the vertical line between points and the line, while in PCA we want to minimize the orthogonal line between the line and points.
-
-- Also in LR we have a special feature that we call y and we try to predict it, whereas in PCA we treat all features equally.
-
-(photo: pca-vs-lr.jpg)
-
-##### How to apply PCA?
-
-first we need to do data pre-processing. it includes feature-scaling and mean normalization.
-
-Then we need to think how to find the two items below:
-
-- the lower dimension vector(s)
-- the value of z for each example. z(i) for example x(i)
-
-(photo: pca-algorithm-1.jpg)
+Then we can pick some of the points within the sample points as the centroids. sometimes if we don't have a good random selection of the centroids we may end up having __Local Optimas__.
+check this photo: (k-means-local-optima.jpg)
 
 
-Imagine we want to reduce the dimension of n-dimensional to k-dimensional data. After doing the pre-processing stage, we need to calculate something called __"Covariance Matrix"__.
-we show it with Sigma letter, but its different from the summation sigma although they both look the same. here is how we calculate it:
-```
-Sigma = (1/m)* sum(x(i) * x(i)')
-```
+The solution for this is, to pick the random points several times and run the algorithm several times. a good practice is to do it between 50-1000 times. Then we will calculate the cost function for each time, and pick the one with the minimum distortion(cost function).
 
-Then we have to calculate something called __"Eigenvectors"__ (eye-gen). It is pre-built in octave like this:
-```
-[U, S, V] = svd(Sigma)   svd stands for "singular value decomposition"
+How to pick the number of clusters? in order to do this we need to calculate cost function for different values of K (number of clusters) and see where we have an Elbow (Elbow method)
+(check the photo called elbow-method.jpg)
 
-OR
-[U, S, V] = eig(Sigma)
-```
 
-by the way Sigma is nxn dimensional.
+### from assignment:
 
-The output of svd shows U as an nxn matrix with each column as U vectors we wanted to calculate, and when we want to reduce the dimension to K we just need to pick the __FIRST__ k vectors from U matrix.
-
-(photo: pca-algorithm-2.jpg)
-
-Now in order to calculate the vector Zn (k x 1), we need to get the first k vectors and have them as a new matrix (n x k), then transpose it (k x n), and multiply it to vector X (n x 1), this way we calculate Z vector.
-(photo: pca-algorithm-3.jpg)
-
-## Week 8: (Part 4)
-
-Sometimes after calculating z (k x 1), and reducing the dimensions of the data, we want to get back direction and have original n dimensions. in order to do it we can do it this way:
-```
-X(approx) = U(reduce) * Z    
-```
-U(reduce) is the U matrix that we picked the first k columns of it.
-
-(photo: reconstruction-from-compressed-representation.jpg)
-
-##### How to pick K for PCA?
-
-The ideal way is to have 99% of variance retained. between 95-99 per cent is so common.
-more info in the photo called: choose-k-theory.jpg
-
-In practice, we have to start with k=1 and calculate all U(reduce), Z vector, X(approx) and check if 99% of variance is retained. if yes, we use k=1, if not we try k=2, and k=3, k=4 until we find the best number.
-An easier way is to use svd function and after doing it once, we calculate the values shown in the photo and increase k values until we get to have 99% of variance retained.
-
-(photo: choose-k-practice.jpg)
-
-##### Supervised learning speedup:
-
-imagine we have (x,y) samples that X is 10000 dimensional. if we want to feed all of it in a logistic regression or any other learning algorithm it will be so slow. what we can do is to unlabel the data first (remove y), then we use PCA to reduce the dimensions to 1000 for example. Now we have a new dataset with (z,y) samples so we can use the new dataset and feed into the learning algorithm and find the hypothesis.
-
-__IMPORTANT__: Mapping from x(i) to z(i) should be defined by running PCA __ONLY__ on the training set not cross validation or test sets.
-(photo: supervised-learning-speedup.jpg)
-
-__NOTE__: its not a good practice to use PCA to prevent overfitting because when we have PCA we throw away y labels and then we do the dimension reduction and it sometimes doesn't end up as expected. for doing this, it better to use regularization.
-(photo: bad-practice.jpg)
+randidx = randperm(size(X, 1));   randomly changes the indices of matrix X (examples).

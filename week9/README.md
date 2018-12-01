@@ -100,3 +100,30 @@ for each X in the example we define two features. x1 = romance, x2= action and a
 
 (photo:recommendation-formulation.jpg)
 (photo:recommendation-gradient-descent.jpg)
+
+__Collaborative Filtering__: It is a type of recommendation system. What is so interesting for this algorithm is, __Feature Learning__ which means it can learn itself which features should be used as predictors.
+
+
+In the last part we learned about content based recommendation which can be so expensive and impractical when we have a lot of examples and features. for example we need to have someone watch all of the movies and decide how many percent each movie is romantic, action, or any other genre.
+
+When we use collaborative filtering, we imagine we don't know any of the percentages for each movie for being romantic, action, etc.
+
+In collaborative filtering we try to find Theta for each user that says how much each of them likes any specific movie. and we show each theta as a nx1 vector where n is the number of features. (in this case the first value is 0 for the intercept, first value is associated with X1 which is romantic, and X2 for X2 which is action movie.
+
+We want to find which X1 for example for the first movie would make Theta(1)' * X(1) almost 5 and which X(1) will make Theta(2)' * X(1) almost 5 and Theta(3)' * X(1) zero and Theta(4)' *X(1) zero?
+(photo:collaborative-filtering-definition.jpg)
+
+- lets see how to formulate it.    j:r(i,j)=1 means for all users j who reated movie i.
+- (photo: collaborative-filtering-formulation.jpg)
+
+What we have to do in the beginning is to ranodmly initialize Theta. Then we use it to predict X and based on new X we find better Thetas, and so on.
+
+__Putting both collabrateive filtering and content based recommendation together:__
+
+In this system, we don't need to go back and forth to find the best Theta or best X values as we learned before.
+
+What we have to do is to find a new J function and minimize it. here is the outcome:
+photo: simultaneous-filtering.jpg
+
+For this algorithm, we dont need to have X0=1 as the intercept because the algorithm will find itself if needed adn we dont need to worry about it.
+(photo: mixed-recommendation-summary.jpg)

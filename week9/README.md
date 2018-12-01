@@ -127,3 +127,33 @@ photo: simultaneous-filtering.jpg
 
 For this algorithm, we dont need to have X0=1 as the intercept because the algorithm will find itself if needed adn we dont need to worry about it.
 (photo: mixed-recommendation-summary.jpg)
+
+__Matrix Implementation__:
+
+The dataset can be shown as a matrix as we see in the photo: matrix-implementation.jpg
+
+__Low Rank Matrix Vectorization__:
+As we can see in the photo called low-rank-matrix-vectorization.jpg we can make the traditional way of predicting Collaborative Filtering into vectorized implementation and we call it Low rank matrix implementation.
+
+__How to find relating movies?__
+
+if we have X(i) features for movies i and find movie j where the difference between them ||X(i)-X(j)|| is small, then the two movies are similar and we can recommend it to the user.
+
+For example if we want 5 recommendations, we will find the first 5 movies with the lowest distance with the original movie.
+
+- now what happens if a user has no rating for any movie?
+
+in this case the first part of cost function will be zero becuase for that user (Eve) there wont be any r(i,j)=1. so in this case the only part of J that has effect is the last part of it.
+
+As we can see in the photo user-with-no-input.jpg
+it returns zero for all Theta items of Eve. This is not really what we want because we can't recommend Eve anything if she has all zeros.
+Now we can use a technique called __Mean Normalization__
+
+For doing this, we will take the average for each movie rating. and save them as a matrix called Mu.
+
+Then we subtract Mu from all columns of matrix Y.
+
+
+Now we use this Y as my new dataset and try to learn Theta and X based on this dataset.
+Then for each user we have Theta(j)' * X(i) +Mu(i)  where Mu(i) is the value we already subtracted. What happens is for Eve, as Theta is a matrix of two zeros, the first part would be zero and the second part would be the recommendation which is the average of the rates for that movie.
+(photo: mean-normalizaion.jpg)
